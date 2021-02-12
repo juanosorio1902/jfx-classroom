@@ -43,7 +43,10 @@ public class UserAccount {
 	public String getCareer() {
 		return career;
 	}
-
+	public void setCareer(String career) {
+		this.career = career;
+	}
+ 
 	public LocalDate getBirthday() {
 		return birthday;
 	}
@@ -51,5 +54,9 @@ public class UserAccount {
 	public String getFavBrowser() {
 		return favBrowser;
 	}
+	public boolean verifyPassword(String pass) {
+		return pass.equals(password);
+	}
+	
 	
 }

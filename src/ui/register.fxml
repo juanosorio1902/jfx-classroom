@@ -160,7 +160,7 @@
             <HBox alignment="CENTER" prefHeight="78.0" prefWidth="384.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#loadLogIn" prefHeight="26.0" prefWidth="62.0" style="-fx-background-color: #334EFF;" text="Log in" textFill="WHITE" />
-                  <Button mnemonicParsing="false" onAction="#createAccount" style="-fx-background-color: #334EFF;" text="Create an account" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#verifyInformation" style="-fx-background-color: #334EFF;" text="Create an account" textFill="WHITE">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

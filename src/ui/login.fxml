@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="538.0">
@@ -34,7 +33,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="320.0" layoutY="291.0" mnemonicParsing="false" onAction="#logIn" style="-fx-background-color: #334EFF;" text="Log in" textFill="WHITE">
+            <Button layoutX="320.0" layoutY="291.0" mnemonicParsing="false" onAction="#verifyCredentials" style="-fx-background-color: #334EFF;" text="Log in" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

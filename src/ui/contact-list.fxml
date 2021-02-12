@@ -14,17 +14,17 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label>
+            <Label fx:id="user">
                <HBox.margin>
                   <Insets right="40.0" />
                </HBox.margin>
             </Label>
-            <ImageView fitHeight="59.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profilePhoto" fitHeight="59.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="30.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" style="-fx-background-color: #334EFF;" text="Button" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: #334EFF;" text="Log out" textFill="WHITE">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
