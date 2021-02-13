@@ -33,13 +33,13 @@
       </HBox>
    </top>
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="accountsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="Username" />
-          <TableColumn prefWidth="75.0" text="Gender" />
-            <TableColumn prefWidth="75.0" text="Career" />
-            <TableColumn prefWidth="75.0" text="Birthday" />
-            <TableColumn prefWidth="75.0" text="Browser" />
+          <TableColumn fx:id="colUser" prefWidth="75.0" text="Username" />
+          <TableColumn fx:id="colGender" prefWidth="75.0" text="Gender" />
+            <TableColumn fx:id="colCareer" prefWidth="75.0" text="Career" />
+            <TableColumn fx:id="colBirthday" prefWidth="75.0" text="Birthday" />
+            <TableColumn fx:id="colBrowser" prefWidth="75.0" text="Browser" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

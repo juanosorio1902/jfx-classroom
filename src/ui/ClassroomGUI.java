@@ -16,8 +16,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +29,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Classroom;
+import model.UserAccount;
 
 public class ClassroomGUI {
 	
@@ -37,13 +42,13 @@ public class ClassroomGUI {
 	private TextField logUser;
 
 	@FXML
-	private TextField logPassword;
+	private PasswordField logPassword;
 	 
 	@FXML
 	private TextField txtUserName;
 
 	@FXML
-	private TextField txtPassword;
+	private PasswordField txtPassword;
 
 	@FXML
 	private TextField txtPhoto;
@@ -77,6 +82,24 @@ public class ClassroomGUI {
 
 	@FXML
 	private ImageView profilePhoto;
+	
+	@FXML
+    private TableView<UserAccount> accountsTable;
+	
+	@FXML
+    private TableColumn<UserAccount, String> colUser;
+
+    @FXML
+    private TableColumn<UserAccount, String> colGender;
+
+    @FXML
+    private TableColumn<UserAccount, String> colCareer;
+
+    @FXML
+    private TableColumn<UserAccount, String> colBirthday;
+
+    @FXML
+    private TableColumn<UserAccount, String> colBrowser;
 
 	
 	@FXML
@@ -127,13 +150,12 @@ public class ClassroomGUI {
 	    }
 	 @FXML
 	 public void verifyCredentials(ActionEvent event) throws IOException {
-		 if(classroom.verifyCredentials(txtUserName.getText().trim(), txtPassword.getText().trim())) {
-				loadList();
-		 }else if (txtUserName.getText().trim().equals("") || txtPassword.getText().trim().equals("")) {
+		 if(txtUserName.getText().equals(null) || txtPassword.getText().equals(null)) {
 				validationAlert("You must fill each field in the form", "error.png", "Validation Error", "OK");
-			}
-		 else{
-				validationAlert("The credentials entered are not valid", "error.png", "Validation Error", "OK");
+			} else if(classroom.verifyCredentials(txtUserName.getText(), logPassword.getText())) {
+				loadList();
+			} else{
+				validationAlert("The username or password given are incorrect", "error.png", "Validation Error", "OK");
 			}
 		 
 	 }
@@ -141,8 +163,7 @@ public class ClassroomGUI {
 
 	@FXML
 	 public void logOut(ActionEvent event) throws IOException {
-		txtUserName.setText("");
-		txtPassword.setText("");
+		
 		logIn();
 		 
 	 }
@@ -164,13 +185,13 @@ public class ClassroomGUI {
 		 primaryStage.close();
 		 primaryStage.show();
 		 btnFavBrowser.getItems().addAll(
-		            "Firefox",
-		            "Chrome",
-		            "Edge",
-		            "Safari",
-		            "Opera",
-		            "Thor"
-		        );
+				 "Firefox",
+				 "Chrome",
+				 "Edge",
+				 "Safari",
+				 "Opera",
+				 "Thor"
+		 );
 		 
 		
 	 }
@@ -192,7 +213,7 @@ public class ClassroomGUI {
 		 primaryStage.show();
 
 	 }
-	 public void loadList() throws IOException {
+	 public void loadList() throws IOException {		 
 		 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("contact-list.fxml"));
 		 fxmlLoader.setController(this);
 		 Parent root = fxmlLoader.load();
@@ -200,9 +221,8 @@ public class ClassroomGUI {
 		 mainPane.setCenter(root);
 		 primaryStage.close();
 		 primaryStage.show();
-		 profilePhoto.setImage(new Image(classroom.getActiveUser().getPhoto()));
-		 user.setText(classroom.getActiveUser().getUsername());
-		 
+		 initializedTable();
+				 
 	 }
 	 private void createAccount() throws IOException {
 		 String gender = "";
@@ -225,7 +245,7 @@ public class ClassroomGUI {
 			 career+=btnIndustrial.getText()+"\n";
 		 }
 		 classroom.createAccount(txtUserName.getText().trim(), txtPassword.getText().trim(), txtPhoto.getText(), gender, 
-					career, btnBirthday.getValue(), btnFavBrowser.getValue().toString());
+					career, btnBirthday.getValue(), btnFavBrowser.getValue());
 			
 		 validationAlert("The account has been created", "validation.png", "Confirmation", "OK");
 		 
@@ -244,6 +264,23 @@ public class ClassroomGUI {
 		stage.getIcons().add(new Image(getClass().getResourceAsStream(icon)));
 		user.showAndWait();
 	} 
+	public void initialized() {
+		
+	}
+	public void initializedTable() {
+		ObservableList<UserAccount> observableList;
+    	observableList = FXCollections.observableArrayList(classroom.getUsers());    	
+		accountsTable.setItems(observableList);
+		colUser.setCellValueFactory(new PropertyValueFactory<UserAccount,String>("username")); 
+		colGender.setCellValueFactory(new PropertyValueFactory<UserAccount,String>("gender"));
+		colCareer.setCellValueFactory(new PropertyValueFactory<UserAccount,String>("career")); 
+		colBirthday.setCellValueFactory(new PropertyValueFactory<UserAccount,String>("birthday"));
+		colBrowser.setCellValueFactory(new PropertyValueFactory<UserAccount,String>("favBrowser"));
+		
+		
+		
+	}
+	
 	public void setStage(Stage stage) {
 		primaryStage = stage;
 	}
